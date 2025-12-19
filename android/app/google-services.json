@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "246594239566",
+    "project_id": "buynow-caf0d",
+    "storage_bucket": "buynow-caf0d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:246594239566:android:0b315da6a4fb2a3522571f",
+        "android_client_info": {
+          "package_name": "com.example.buynow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDatjTIj8KfCVVbzDIbeS_7tbmxSk3dkNU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
