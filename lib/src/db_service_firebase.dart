@@ -134,4 +134,19 @@ class DbServiceFirebase {
       'lastUsedAt': FieldValue.serverTimestamp(),
     });
   }
+
+  Future<bool> productExists({
+    required String uid,
+    required String name,
+  }) async {
+    final query = await db
+        .collection('users')
+        .doc(uid)
+        .collection('products')
+        .where('name', isEqualTo: name)
+        .limit(1)
+        .get();
+
+    return query.docs.isNotEmpty;
+  }
 }

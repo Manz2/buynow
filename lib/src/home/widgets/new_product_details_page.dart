@@ -24,7 +24,13 @@ class _NewProductDetailsPageState extends State<NewProductDetailsPage> {
 
   String categoryLabel(ItemCategory c) => itemCategoryLabels[c] ?? c.name;
 
-  final _icons = ['paprika.png', 'milk.png', 'flour.png', 'default.png'];
+  final _icons = [
+    'paprika.png',
+    'milk.png',
+    'flour.png',
+    'default.png',
+    'meat.png',
+  ];
 
   @override
   void initState() {
@@ -148,15 +154,44 @@ class _NewProductDetailsPageState extends State<NewProductDetailsPage> {
     );
   }
 
-  void _save() {
-    widget.controller.addItemToProducts(
+  Future<void> _save() async {
+    final name = _nameCtrl.text.trim();
+    if (name.isEmpty) return;
+
+    final exists = await widget.controller.db.productExists(
+      uid: widget.controller.model.uid,
+      name: name,
+    );
+    if (!mounted) return;
+
+    if (exists) {
+      await showCupertinoDialog(
+        context: context,
+        builder: (_) => CupertinoAlertDialog(
+          title: const Text('Name bereits vorhanden'),
+          content: const Text(
+            'Es existiert schon ein Produkt mit diesem Namen. '
+            'Bitte wビhle einen anderen Namen oder nutze das vorhandene Produkt.',
+          ),
+          actions: [
+            CupertinoDialogAction(
+              child: const Text('OK'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+
+    await widget.controller.addItemToProducts(
       listId: widget.controller.model.activeListId!,
-      name: widget.name,
+      name: name,
       category: _selectedCategory!.name,
       icon: _selectedIcon!,
     );
 
-    Navigator.pop(context);
+    if (mounted) Navigator.pop(context);
   }
 }
 

@@ -17,5 +17,3 @@ samples, guidance on mobile development, and a full API reference.
 
 
 ## TODO
-- Warn when name already present when creating new products
-- 
