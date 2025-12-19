@@ -82,12 +82,12 @@ class HomeController {
     required String additionalInfo,
   }) {
     // Update timestamp
-    db.upsertProduct(
+    
+    db.updateLastUse(
       uid: model.uid,
-      name: name,
-      category: category,
-      icon: icon,
+      id:itemId
     );
+    
 
     // add item to list
     return db.addItemToList(

@@ -74,7 +74,6 @@ class _NewProductDetailsPageState extends State<NewProductDetailsPage> {
 
             const SizedBox(height: 24),
 
-            // 🔹 Kategorie
             _Section(
               title: 'Kategorie',
               child: CupertinoButton(
@@ -115,7 +114,6 @@ class _NewProductDetailsPageState extends State<NewProductDetailsPage> {
 
             const SizedBox(height: 24),
 
-            // 🔹 Icon-Auswahl
             _Section(
               title: 'Icon',
               child: Wrap(
@@ -162,7 +160,6 @@ class _NewProductDetailsPageState extends State<NewProductDetailsPage> {
   }
 }
 
-/// 🔹 Wiederverwendbare Sektion (optisch ruhig)
 class _Section extends StatelessWidget {
   final String title;
   final Widget child;

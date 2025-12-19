@@ -82,20 +82,25 @@ class DbServiceFirebase {
         .get();
 
     if (query.docs.isEmpty) {
-      await productsRef.add({
+      final docRef = productsRef.doc();
+
+      await docRef.set({
         'name': name,
         'category': category,
         'useCount': 1,
         'lastUsedAt': FieldValue.serverTimestamp(),
         'icon': icon,
       });
+
+      return docRef.id;
     } else {
       await query.docs.first.reference.update({
         'useCount': FieldValue.increment(1),
         'lastUsedAt': FieldValue.serverTimestamp(),
       });
+
+      return query.docs.first.id;
     }
-    return query.docs.isEmpty ? productsRef.doc().id : query.docs.first.id;
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getProductsStream(String uid) {
@@ -120,5 +125,13 @@ class DbServiceFirebase {
         .collection('items')
         .doc(itemId)
         .delete();
+  }
+
+  void updateLastUse({required String uid, required String id}) {
+    final productsRef = db.collection('users').doc(uid).collection('products');
+    productsRef.doc(id).update({
+      'useCount': FieldValue.increment(1),
+      'lastUsedAt': FieldValue.serverTimestamp(),
+    });
   }
 }

@@ -30,12 +30,12 @@ class ItemList extends StatelessWidget {
             final icon = data['icon'] as String? ?? 'default.png';
 
             return Container(
-              margin: const EdgeInsets.only(bottom: 12), // ✅ Abstand
+              margin: const EdgeInsets.only(bottom: 12),
               decoration: BoxDecoration(
                 color: completed
                     ? CupertinoColors.systemGrey5
                     : CupertinoColors.systemBlue.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(16), // ✅ abgerundet
+                borderRadius: BorderRadius.circular(16),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
