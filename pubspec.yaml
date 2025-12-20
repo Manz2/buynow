@@ -1,3 +1,4 @@
+name: buynow
 workflows:
   ios-testflight:
     name: iOS TestFlight Build
