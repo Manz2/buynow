@@ -1,12 +1,11 @@
 workflows:
   ios-testflight:
     name: iOS TestFlight Build
-
-    integrations:
-      app_store_connect: true
-      
     max_build_duration: 120
     instance_type: mac_mini_m2
+
+    integrations:
+      app_store_connect: app_store_connect
 
     environment:
       flutter: stable
@@ -15,39 +14,21 @@ workflows:
 
       vars:
         BUNDLE_ID: "de.manz2.buynow"
-        APP_STORE_APPLE_ID: "6756811129" # aus App Store Connect
+        APP_STORE_APPLE_ID: "6756811129"
 
       ios_signing:
         distribution_type: app_store
         bundle_identifier: $BUNDLE_ID
 
-    triggering:
-      events:
-        - push
-      branch_patterns:
-        - pattern: main
-          include: true
-
     scripts:
       - name: Flutter pub get
-        script: |
-          flutter pub get
+        script: flutter pub get
 
       - name: Build iOS IPA
-        script: |
-          flutter build ipa \
-            --release \
-            --export-options-plist=/Users/builder/export_options.plist
-
-    artifacts:
-      - build/ios/ipa/*.ipa
-      - build/ios/logs/*.log
+        script: flutter build ipa --release
 
     publishing:
       app_store_connect:
         auth: integration
         submit_to_testflight: true
         submit_to_app_store: false
-
-
-        
