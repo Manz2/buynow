@@ -1,31 +1,46 @@
-name: buynow
-description: "A new Flutter project."
+workflows:
+  ios-testflight:
+    name: iOS TestFlight Build
+    max_build_duration: 120
+    instance_type: mac_mini_m2
 
-publish_to: 'none'
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
 
-version: 1.0.0+1
+      vars:
+        BUNDLE_ID: "de.manz2.buynow"
+        APP_STORE_APPLE_ID: "6756811129" # aus App Store Connect
 
-environment:
-  sdk: ^3.10.4
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: $BUNDLE_ID
 
-dependencies:
-  flutter:
-    sdk: flutter
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
 
-  cupertino_icons: ^1.0.8
-  firebase_auth: ^6.1.3
-  cloud_firestore: ^6.1.1
-  firebase_core: ^4.3.0
-  logger: ^2.6.2
-  shared_preferences: ^2.5.4
+    scripts:
+      - name: Flutter pub get
+        script: |
+          flutter pub get
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
+      - name: Build iOS IPA
+        script: |
+          flutter build ipa \
+            --release \
+            --export-options-plist=/Users/builder/export_options.plist
 
-  flutter_lints: ^6.0.0
-flutter:
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - build/ios/logs/*.log
 
-  uses-material-design: false
-  assets:
-    - assets/icons/white/
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        submit_to_app_store: false
