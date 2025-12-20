@@ -111,4 +111,17 @@ class HomeController {
       itemId: itemId,
     );
   }
+
+  Future<void> updateItemAdditionalInfo({
+    required String listId,
+    required String itemId,
+    required String additionalInfo,
+  }) {
+    return db.updateItemAdditionalInfo(
+      uid: model.uid,
+      listId: listId,
+      itemId: itemId,
+      additionalInfo: additionalInfo,
+    );
+  }
 }

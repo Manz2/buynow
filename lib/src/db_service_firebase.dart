@@ -127,6 +127,22 @@ class DbServiceFirebase {
         .delete();
   }
 
+  Future<void> updateItemAdditionalInfo({
+    required String uid,
+    required String listId,
+    required String itemId,
+    required String additionalInfo,
+  }) {
+    return db
+        .collection('users')
+        .doc(uid)
+        .collection('lists')
+        .doc(listId)
+        .collection('items')
+        .doc(itemId)
+        .update({'additionalInfo': additionalInfo});
+  }
+
   void updateLastUse({required String uid, required String id}) {
     final productsRef = db.collection('users').doc(uid).collection('products');
     productsRef.doc(id).update({

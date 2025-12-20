@@ -29,47 +29,57 @@ class ItemList extends StatelessWidget {
             final data = item.data();
             final icon = data['icon'] as String? ?? 'default.png';
 
-            return Container(
-              margin: const EdgeInsets.only(bottom: 12),
-              decoration: BoxDecoration(
-                color: completed
-                    ? CupertinoColors.systemGrey5
-                    : CupertinoColors.systemBlue.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 12,
-                  horizontal: 16,
+            return GestureDetector(
+              onTap: () async {
+                final listId = controller.model.activeListId;
+                if (listId == null) return;
+                await controller.removeItemFromList(
+                  listId: listId,
+                  itemId: item.id,
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(
+                  color: completed
+                      ? CupertinoColors.systemGrey5
+                      : CupertinoColors.systemBlue.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      'assets/icons/white/$icon',
-                      width: 48,
-                      height: 48,
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Text(
-                        item['name'],
-                        style: TextStyle(
-                          fontSize: 20,
-                          decoration: completed
-                              ? TextDecoration.lineThrough
-                              : null,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 16,
+                  ),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/icons/white/$icon',
+                        width: 48,
+                        height: 48,
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          item['name'],
+                          style: TextStyle(
+                            fontSize: 20,
+                            decoration: completed
+                                ? TextDecoration.lineThrough
+                                : null,
+                          ),
                         ),
                       ),
-                    ),
-                    if (item['additionalInfo'] != null &&
-                        (item['additionalInfo'] as String).isNotEmpty)
-                      Text(
-                        item['additionalInfo'],
-                        style: const TextStyle(
-                          color: CupertinoColors.systemGrey,
+                      if (item['additionalInfo'] != null &&
+                          (item['additionalInfo'] as String).isNotEmpty)
+                        Text(
+                          item['additionalInfo'],
+                          style: const TextStyle(
+                            color: CupertinoColors.systemGrey,
+                          ),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );
