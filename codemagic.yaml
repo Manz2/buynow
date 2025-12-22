@@ -19,6 +19,7 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: $BUNDLE_ID
+        automatic_signing: true
 
     scripts:
       - name: Flutter pub get
