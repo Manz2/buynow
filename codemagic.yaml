@@ -25,7 +25,7 @@ workflows:
         script: flutter pub get
 
       - name: Build iOS IPA
-        script: flutter build ipa --release --no-codesign
+        script: flutter build ipa --release
 
     publishing:
       app_store_connect:
