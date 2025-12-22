@@ -12,9 +12,6 @@
   <key>teamID</key>
   <string>8C27JPJ8R9</string>
 
-  <key>compileBitcode</key>
-  <false/>
-
   <key>destination</key>
   <string>export</string>
 </dict>
