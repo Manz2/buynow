@@ -18,8 +18,7 @@ workflows:
 
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: $BUNDLE_ID
-        fetch_signing_files: true
+        bundle_identifier: "com.manz2.buynow"
 
     scripts:
       - name: Flutter pub get
@@ -33,3 +32,5 @@ workflows:
         auth: integration
         submit_to_testflight: true
         submit_to_app_store: false
+        beta_groups:
+          - Ios
