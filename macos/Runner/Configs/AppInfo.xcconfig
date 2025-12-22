@@ -8,7 +8,7 @@
 PRODUCT_NAME = buynow
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.buynow
+PRODUCT_BUNDLE_IDENTIFIER = com.manz2.buynow
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2025 com.example. All rights reserved.
