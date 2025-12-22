@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDatjTIj8KfCVVbzDIbeS_7tbmxSk3dkNU',
-    appId: '1:246594239566:android:0b315da6a4fb2a3522571f',
+    appId: '1:246594239566:android:682c208a13f6686f22571f',
     messagingSenderId: '246594239566',
     projectId: 'buynow-caf0d',
     storageBucket: 'buynow-caf0d.firebasestorage.app',
